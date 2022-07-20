@@ -8,31 +8,22 @@ import {
 	UpdateDateColumn,
 } from "typeorm";
 
-@Entity({name: `addresses`})
-export class Address {
+@Entity({name: `clients`})
+export class Client {
 	@PrimaryColumn()
-	id: number;
-
-	@Column({name: `zip_code`, nullable: true})
-	zipCode: string;
+	id: string;
 
 	@Column({nullable: true})
-	country: string;
+	name: string;
 
 	@Column({nullable: true})
-	region: string;
+	surname: string;
 
 	@Column({nullable: true})
-	city: string;
+	patronymic: string;
 
-	@Column({nullable: true})
-	street: string;
-
-	@Column({nullable: true})
-	house: string;
-
-	@Column({nullable: true})
-	apartment: string;
+	@Column()
+	dob: Date;
 
 	@CreateDateColumn({name: `created_at`})
 	createdAt: Date;

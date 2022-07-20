@@ -1,12 +1,8 @@
-import {AddressModule} from "./../address/address.module";
-import {ProductModule} from "./../product/product.module";
-import {OrderType} from "./../order/entity/orderType.entity";
+import {ClientModule} from "../client/client.module";
+import {AddressModule} from "../address/address.module";
 import {Module} from "@nestjs/common";
-import {UserModule} from "./../user/user.module";
 
 @Module({
-	imports: [UserModule, OrderType, ProductModule, AddressModule],
-	controllers: [],
-	providers: [],
+	imports: [ClientModule, AddressModule],
 })
 export class AppModule {}
