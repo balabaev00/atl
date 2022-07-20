@@ -1,9 +1,11 @@
+import { Client } from './../../client/entity/client.entity';
 import {
 	Column,
 	CreateDateColumn,
 	Entity,
 	JoinColumn,
 	ManyToOne,
+	OneToMany,
 	PrimaryColumn,
 	UpdateDateColumn,
 } from "typeorm";
@@ -33,6 +35,11 @@ export class Address {
 
 	@Column({nullable: true})
 	apartment: string;
+
+	@OneToMany(() => Client, client => client.address)
+	clients: Client[];
+	clients: Client[];
+	clients: Client[];
 
 	@CreateDateColumn({name: `created_at`})
 	createdAt: Date;
