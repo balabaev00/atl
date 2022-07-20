@@ -1,3 +1,4 @@
+import {Address} from "./../../address/entity/address.entity";
 import {Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn} from "typeorm";
 import {JobType} from "types";
 
@@ -20,6 +21,10 @@ export class Job {
 
 	@Column()
 	tin: string;
+
+	factAddress: Address;
+
+	jurAddress: Address;
 
 	@Column({name: `phone_number`})
 	phoneNumber: string;
