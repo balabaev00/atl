@@ -1,13 +1,21 @@
 import {Address} from "./../../address/entity/address.entity";
-import {Column, CreateDateColumn, Entity, PrimaryColumn, UpdateDateColumn} from "typeorm";
-import {JobType} from "types";
+import {
+	Column,
+	CreateDateColumn,
+	Entity,
+	JoinColumn,
+	ManyToOne,
+	PrimaryColumn,
+	UpdateDateColumn,
+} from "typeorm";
+import {JobType} from "../types/job.type";
 
 @Entity({name: `jobs`})
 export class Job {
 	@PrimaryColumn()
 	id: string;
 
-	@Column()
+	@Column(`text`)
 	type: JobType;
 
 	@Column({name: `date_emp`})
@@ -22,9 +30,13 @@ export class Job {
 	@Column()
 	tin: string;
 
-	factAddress: Address;
+	@ManyToOne(() => Address, address => address.factJobs)
+	@JoinColumn({name: `fact_address`})
+	factAddress?: Address;
 
-	jurAddress: Address;
+	@ManyToOne(() => Address, address => address.jurJobs)
+	@JoinColumn({name: `jur_address`})
+	jurAddress?: Address;
 
 	@Column({name: `phone_number`})
 	phoneNumber: string;

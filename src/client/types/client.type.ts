@@ -1,13 +1,3 @@
-export enum CommunicationType {
-	PHONE = `phone`,
-	EMAIL = `email`,
-}
-
-export enum JobType {
-	MAIN = `main`,
-	PART_TIME = `part-time`,
-}
-
 export enum EducationType {
 	secondary = `Среднее`,
 	secondarySpecial = `Среднее специальное`,
@@ -15,4 +5,9 @@ export enum EducationType {
 	heigher = `Высшее`,
 	twoOrMoreHigher = `Два и более высших образований`,
 	academicDegree = `Академическая степень`,
+}
+
+export enum SortType {
+	asc = `ASC`,
+	desc = `DESC`,
 }

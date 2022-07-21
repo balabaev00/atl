@@ -5,5 +5,5 @@ export class AddressDto {
 	city?: string;
 	street?: string;
 	house?: string;
-	aparment?: string;
+	apartment?: string;
 }

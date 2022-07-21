@@ -14,7 +14,7 @@ export class Passport {
 	@Column()
 	giver: string;
 
-	@Column()
+	@Column({name: `date_issued`})
 	dateIssued: Date;
 
 	@CreateDateColumn({name: `created_at`})

@@ -1,7 +1,7 @@
 import {ChildDto} from "./../../child/dto/child.dto";
-import {EducationType} from "types";
 import {AddressDto} from "./../../address/dto/address.dto";
 import {PassportDto} from "./../../passport/dto/passport.dto";
+import {EducationType} from "../types/client.type";
 
 export class CreateClientDto {
 	name?: string;
@@ -12,12 +12,16 @@ export class CreateClientDto {
 	children: ChildDto[];
 
 	passport: PassportDto;
-	livingAddress: AddressDto;
-	regAddress: AddressDto;
+	livingAddress?: AddressDto;
+	regAddress?: AddressDto;
+
+	jobs: []; // TODO fix
 
 	typeEducation: EducationType;
-	monIncome: number;
-	monExpenses: number;
+	monIncome?: number;
+	monExpenses?: number;
+
+	communications: []; //TODO fix
 }
 
 export class ClientDto {

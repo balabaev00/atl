@@ -1,12 +1,12 @@
 import {Column, Entity, PrimaryColumn} from "typeorm";
-import {CommunicationType} from "types";
+import {CommunicationType} from "../types/communication.type";
 
-Entity({name: `communications`});
+@Entity({name: `communications`})
 export class Communication {
 	@PrimaryColumn()
 	id: string;
 
-	@Column()
+	@Column(`text`)
 	type: CommunicationType;
 
 	@Column()

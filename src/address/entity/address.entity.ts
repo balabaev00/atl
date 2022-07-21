@@ -1,4 +1,5 @@
-import { Client } from './../../client/entity/client.entity';
+import {Job} from "./../../job/entity/job.entity";
+import {Client} from "./../../client/entity/client.entity";
 import {
 	Column,
 	CreateDateColumn,
@@ -13,7 +14,7 @@ import {
 @Entity({name: `addresses`})
 export class Address {
 	@PrimaryColumn()
-	id: number;
+	id: string;
 
 	@Column({name: `zip_code`, nullable: true})
 	zipCode: string;
@@ -36,10 +37,17 @@ export class Address {
 	@Column({nullable: true})
 	apartment: string;
 
-	@OneToMany(() => Client, client => client.address)
-	clients: Client[];
-	clients: Client[];
-	clients: Client[];
+	@OneToMany(() => Client, client => client.livingAddress)
+	livingClients: Client[];
+
+	@OneToMany(() => Client, client => client.regAddress)
+	regClients: Client[];
+
+	@OneToMany(() => Job, job => job.factAddress)
+	factJobs: Job[];
+
+	@OneToMany(() => Job, job => job.jurAddress)
+	jurJobs: Job[];
 
 	@CreateDateColumn({name: `created_at`})
 	createdAt: Date;
