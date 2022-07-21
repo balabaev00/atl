@@ -7,7 +7,7 @@ import {ChildService} from "./../child/child.service";
 import {Injectable} from "@nestjs/common";
 import {InjectRepository} from "@nestjs/typeorm";
 import {Repository} from "typeorm";
-import {CreateClientDto} from "./dto/client.dto";
+import {CreateClientDto, UpdateClientDto} from "./dto/client.dto";
 import {Client} from "./entity/client.entity";
 import {EducationType, SortType} from "./types/client.type";
 const _ = require("lodash");
@@ -119,6 +119,10 @@ export class ClientService {
 			.leftJoinAndSelect(`clients.livingAddress`, `livingAddress`)
 			.leftJoinAndSelect(`clients.regAddress`, `regAddress`)
 			.leftJoinAndSelect(`clients.passport`, `passports`)
+			.leftJoinAndSelect(`clients.spouse`, `spouse`)
+			.leftJoinAndSelect(`spouse.livingAddress`, `spouseLivingAddress`)
+			.leftJoinAndSelect(`spouse.regAddress`, `spouseRegAddress`)
+			.leftJoinAndSelect(`spouse.passport`, `spousePassports`)
 			.where(`clients.id = :clientId`, {clientId: clientId})
 			.getOne();
 
@@ -127,6 +131,13 @@ export class ClientService {
 		return client;
 	}
 
+	/**
+	 * We're creating a query builder, joining the client's living address, registration address and
+	 * passport, and then sorting the results by the sortBy and sortDir parameters
+	 * @param {SortType} [sortBy] - SortType - the type of sorting.
+	 * @param {string} [sortDir] - the direction of the sorting, either ASC or DESC
+	 * @returns .getMany();
+	 */
 	async getAll(sortBy?: SortType, sortDir?: string) {
 		if (sortBy && sortDir)
 			return await this.clientRepository
@@ -144,5 +155,16 @@ export class ClientService {
 				.leftJoinAndSelect(`clients.regAddress`, `regAddress`)
 				.leftJoinAndSelect(`clients.passport`, `passports`)
 				.getMany();
+	}
+
+	async update(clientId: string, dto: UpdateClientDto) {
+		const oldClient = await this.getOne(clientId);
+
+		if (oldClient === `ENTITY_NOT_FOUND`) return oldClient;
+
+		Object.assign(oldClient, dto);
+		await this.clientRepository.save(oldClient);
+
+		return `OK`;
 	}
 }

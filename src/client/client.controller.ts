@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Param, Post, Query} from "@nestjs/common";
+import {Body, Controller, Delete, Get, Param, Patch, Post, Query} from "@nestjs/common";
 import {ClientService} from "./client.service";
 import {CreateClientDto} from "./dto/client.dto";
 import {SortType} from "./types/client.type";
@@ -66,6 +66,13 @@ export class ClientController {
 				status: 404,
 				code: res,
 			};
+
+		return res;
+	}
+
+	@Patch(`:clientId`)
+	async update(@Param(`clientId`) clientId: string, @Body() dto: CreateClientDto) {
+		const res = await this.clientService.update(clientId, dto);
 
 		return res;
 	}

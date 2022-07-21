@@ -14,7 +14,6 @@ import {
 	UpdateDateColumn,
 } from "typeorm";
 import {EducationType} from "../types/client.type";
-import {Transform} from "class-transformer";
 
 @Entity({name: `clients`})
 export class Client {
@@ -56,6 +55,10 @@ export class Client {
 
 	@Column({nullable: true, type: `decimal`, scale: 2, name: `mon_expenses`})
 	monExpenses: number;
+
+	@OneToOne(() => Client)
+	@JoinColumn({name: `spouse_id`})
+	spouse?: Client;
 
 	@CreateDateColumn({name: `created_at`})
 	createdAt: Date;
